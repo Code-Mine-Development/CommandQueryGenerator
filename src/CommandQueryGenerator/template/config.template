@@ -1,0 +1,12 @@
+return [
+    'service_manager' => [
+        'factories'          => [
+        ],
+    ],
+    'tactician'       => [
+        'handler-map' => [
+        ],
+        'middleware'  => [
+        ],
+    ],
+];

@@ -1,18 +1,30 @@
 {
-    "name"       : "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
+    "name"       : "code-mine/zf-tactician-comandquery-generator",
+    "description": "Command Query generator for tactician lib",
     "license"    : "BSD-3-Clause",
     "keywords"   : [
-        "framework",
-        "zf2"
+        "tactician",
+        "generator",
+        "command",
+        "query"
     ],
-    "homepage"   : "http://framework.zend.com/",
-    "require"    : {
-        "php"                        : ">=5.5",
-        "zendframework/zendframework": "~2.5",
-        "zendframework/zend-code"    : "~2.5"
+    "homepage"   : "http://code-mine.com",
+    "support"    : {
+        "email": "office@code-mine.com"
     },
-    "require-dev": {
-        "zendframework/zftool": "0.1.*"
+    "require"    : {
+        "php"                               : ">=5.5",
+        "zendframework/zend-servicemanager" : "~2.5",
+        "zendframework/zend-mvc"            : "~2.5",
+        "zendframework/zend-console"        : "~2.5",
+        "zendframework/zend-modulemanager"  : "~2.5",
+        "zendframework/zend-code"           : "~2.5",
+        "zendframework/zend-server"         : "~2.5",
+        "code-mine/zf-tactician-comandquery": "~0.3"
+    },
+    "autoload"   : {
+        "psr-4": {
+            "CodeMine\\CommandQueryGenerator\\": "src"
+        }
     }
 }
