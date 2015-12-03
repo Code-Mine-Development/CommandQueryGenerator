@@ -3,7 +3,7 @@
  * @author Radek Adamiec <radek@code-mine.com>.
  */
 
-namespace CommandQueryGenerator\Service;
+namespace CodeMine\CommandQueryGenerator\Service;
 
 
 use CodeMine\CommandQuery\CommandQueryInterface;
@@ -18,7 +18,7 @@ abstract class AbstractCommandQueryService
     protected $modulePath;
     protected $moduleName;
     /**
-     * @var \CommandQueryGenerator\Service\DirectoryService
+     * @var \CodeMine\CommandQueryGenerator\Service\DirectoryService
      */
     protected $directoryService;
 
@@ -27,7 +27,7 @@ abstract class AbstractCommandQueryService
      *
      * @param                                                 $commandQueryName
      * @param                                                 $moduleName
-     * @param \CommandQueryGenerator\Service\DirectoryService $directoryService
+     * @param \CodeMine\CommandQueryGenerator\Service\DirectoryService $directoryService
      */
     public function __construct($commandQueryName, $moduleName, DirectoryService $directoryService)
     {

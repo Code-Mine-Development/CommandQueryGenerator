@@ -1,5 +1,5 @@
 <?php
-namespace CommandQueryGenerator;
+namespace CodeMine\CommandQueryGenerator;
 
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;

@@ -3,7 +3,7 @@
  * @author Radek Adamiec <radek@code-mine.com>.
  */
 
-namespace CommandQueryGenerator\Service;
+namespace CodeMine\CommandQueryGenerator\Service;
 
 
 use Zend\Code\Generator\FileGenerator;
@@ -13,7 +13,7 @@ class ConfigService
     const CONFIG_NAME = 'command-query.global.php';
     private $objectPath;
     /**
-     * @var \CommandQueryGenerator\Service\DirectoryService
+     * @var \CodeMine\CommandQueryGenerator\Service\DirectoryService
      */
     private $directoryService;
     private $confPath;
@@ -46,7 +46,7 @@ class ConfigService
      * ConfigService constructor.
      *
      * @param                                                 $objectPath
-     * @param \CommandQueryGenerator\Service\DirectoryService $directoryService
+     * @param \CodeMine\CommandQueryGenerator\Service\DirectoryService $directoryService
      */
     public function __construct($objectPath, DirectoryService $directoryService)
     {

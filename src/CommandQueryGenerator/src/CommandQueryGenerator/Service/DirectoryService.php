@@ -3,7 +3,7 @@
  * @author Radek Adamiec <radek@code-mine.com>.
  */
 
-namespace CommandQueryGenerator\Service;
+namespace CodeMine\CommandQueryGenerator\Service;
 
 
 class DirectoryService

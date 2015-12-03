@@ -1,8 +1,8 @@
 <?php
-namespace CommandQueryGenerator\Controller;
+namespace CodeMine\CommandQueryGenerator\Controller;
 
-use CommandQueryGenerator\Service\CreateCommandService;
-use CommandQueryGenerator\Service\DirectoryService;
+use CodeMine\CommandQueryGenerator\Service\CreateCommandService;
+use CodeMine\CommandQueryGenerator\Service\DirectoryService;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 

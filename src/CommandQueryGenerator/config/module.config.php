@@ -1,8 +1,9 @@
 <?php
-use CommandQueryGenerator\Controller\CommandController;
-use CommandQueryGenerator\Controller\CommandControllerFactory;
-use CommandQueryGenerator\Controller\QueryController;
-use CommandQueryGenerator\Controller\QueryControllerFactory;
+
+use CodeMine\CommandQueryGenerator\Controller\CommandController;
+use CodeMine\CommandQueryGenerator\Controller\CommandControllerFactory;
+use CodeMine\CommandQueryGenerator\Controller\QueryController;
+use CodeMine\CommandQueryGenerator\Controller\QueryControllerFactory;
 
 return [
     'controllers' => [

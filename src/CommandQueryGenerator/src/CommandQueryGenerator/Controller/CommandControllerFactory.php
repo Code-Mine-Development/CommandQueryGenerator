@@ -1,5 +1,5 @@
 <?php
-namespace CommandQueryGenerator\Controller;
+namespace CodeMine\CommandQueryGenerator\Controller;
 
 
 use Zend\ServiceManager\FactoryInterface;
