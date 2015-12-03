@@ -19,26 +19,7 @@ class ConfigService
     private $confPath;
 
 
-    private function addToConfigObjects($objectName, $objectHandlerName, $objectHandlerFactoryName)
-    {
-        $conf = include $this->confPath;
 
-        $fileGenerator = FileGenerator::fromReflectedFileName($this->confPath);
-
-
-        $conf['service_manager']['factories'][$objectHandlerName] = $objectHandlerFactoryName;
-        $conf['tactician']['handler-map'][$objectName]            = $objectHandlerName;
-        $body                                                     = sprintf('return %s;', var_export($conf, TRUE));
-
-
-        $newFile = new FileGenerator();
-        $newFile->setUses($fileGenerator->getUses());
-        $newFile->setBody($body);
-
-
-        file_put_contents($this->confPath, $newFile->generate());
-
-    }
 
 
 
@@ -57,6 +38,27 @@ class ConfigService
         $this->confPath         = $confPath;
     }
 
+    private function addToConfigObjects($objectName, $objectHandlerName, $objectHandlerFactoryName)
+    {
+        $conf = include $this->confPath;
+
+
+        $fileGenerator = FileGenerator::fromReflectedFileName($this->confPath);
+
+
+        $conf['service_manager']['factories'][$objectHandlerName] = $objectHandlerFactoryName;
+        $conf['tactician']['handler-map'][$objectName]            = $objectHandlerName;
+        $body                                                     = sprintf('return %s;', var_export($conf, TRUE));
+
+
+        $newFile = new FileGenerator();
+        $newFile->setUses($fileGenerator->getUses());
+        $newFile->setBody($body);
+
+
+        file_put_contents($this->confPath, $newFile->generate());
+
+    }
 
     public function addCommandQueryToConfig($objectName, $objectHandlerName, $objectHandlerFactoryName)
     {
