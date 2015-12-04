@@ -12,16 +12,12 @@ class ConfigService
 {
     const CONFIG_NAME = 'command-query.global.php';
     private $objectPath;
+
     /**
      * @var \CodeMine\CommandQueryGenerator\Service\DirectoryService
      */
     private $directoryService;
     private $confPath;
-
-
-
-
-
 
     /**
      * ConfigService constructor.
@@ -87,7 +83,8 @@ class ConfigService
      */
     private function getConfigTemplate()
     {
-        return file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR .
+
+        return file_get_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR  .
                'template' . DIRECTORY_SEPARATOR . 'config.template');
     }
 }

@@ -10,6 +10,7 @@ use CodeMine\CommandQuery\CommandQueryInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\MethodGenerator;
+use Zend\Server\Reflection\ReflectionClass;
 use Zend\ServiceManager\FactoryInterface;
 
 abstract class AbstractCommandQueryService
@@ -186,6 +187,9 @@ abstract class AbstractCommandQueryService
         $handlerFactoryGenerator->addUse($classToImplement);
         $handlerFactoryGenerator->setImplementedInterfaces(['FactoryInterface']);
         $this->addMethodsFromInterface($classToImplement, $handlerFactoryGenerator);
+        $method = $handlerFactoryGenerator->getMethod('createService');
+        $handlerFactoryGenerator->addUse(sprintf('%s\%s',$handlerGenerator->getNamespaceName(), $handlerGenerator->getName()));
+        $method->setBody(sprintf('return new %s();', $handlerGenerator->getName()));
 
         //GENERATE IT !!!
         $fileGenerator = FileGenerator::fromArray(['classes' => [$classGenerator]]);
