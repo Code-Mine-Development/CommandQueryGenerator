@@ -7,6 +7,7 @@ namespace CodeMine\CommandQueryGenerator\Service;
 
 
 use CodeMine\CommandQuery\AbstractCommandHandler;
+use CodeMine\CommandQuery\CommandQueryInputFilterAwareInterface;
 
 class CreateCommandService extends AbstractCommandQueryService
 {
@@ -50,6 +51,11 @@ class CreateCommandService extends AbstractCommandQueryService
     public function getAbstractHandlerClassName()
     {
         return AbstractCommandHandler::class;
+    }
+
+    public function getCommandQueryInterfaceToImplement()
+    {
+        return CommandQueryInputFilterAwareInterface::class;
     }
 
 

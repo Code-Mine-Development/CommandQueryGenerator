@@ -6,11 +6,10 @@
 namespace CodeMine\CommandQueryGenerator\Service;
 
 
-use CodeMine\CommandQuery\CommandQueryInterface;
+use CodeMine\CommandQuery\CommandQueryInputFilterAwareInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\MethodGenerator;
-use Zend\Server\Reflection\ReflectionClass;
 use Zend\ServiceManager\FactoryInterface;
 
 abstract class AbstractCommandQueryService
@@ -45,6 +44,8 @@ abstract class AbstractCommandQueryService
     abstract public function getDirectory();
 
     abstract public function getAbstractHandlerClassName();
+
+    abstract public function getCommandQueryInterfaceToImplement();
 
 
     /**
@@ -165,10 +166,11 @@ abstract class AbstractCommandQueryService
 
 
         //Set basic properties for command
-        $classToImplement = CommandQueryInterface::class;
+        $classToImplement = $this->getCommandQueryInterfaceToImplement();
         $classGenerator->setName($className);
         $classGenerator->addUse($classToImplement);
-        $classGenerator->setImplementedInterfaces(['CommandQueryInterface']);
+        $tmpRef = new \ReflectionClass($classToImplement);
+        $classGenerator->setImplementedInterfaces([$tmpRef->getShortName()]);
         $this->addMethodsFromInterface($classToImplement, $classGenerator);
 
 
