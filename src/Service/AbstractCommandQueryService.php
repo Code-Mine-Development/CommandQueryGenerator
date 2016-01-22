@@ -160,37 +160,39 @@ abstract class AbstractCommandQueryService
         $classGenerator = new ClassGenerator();
         $classGenerator->setNamespaceName(trim($namespace, '\\'));
 
-        //Clone first class generator object so we don't need to set namespaces twice
-        $handlerGenerator        = clone $classGenerator;
-        $handlerFactoryGenerator = clone $classGenerator;
+        $handlerGenerator = new ClassGenerator();
+        $handlerGenerator->setNamespaceName(trim($namespace, '\\'));
+
+        $handlerFactoryGenerator = new ClassGenerator();
+        $handlerFactoryGenerator->setNamespaceName(trim($namespace, '\\'));
 
 
         //Set basic properties for command
-        $classToImplement = $this->getCommandQueryInterfaceToImplement();
+        $commandQueryInterfaceToImplement = $this->getCommandQueryInterfaceToImplement();
         $classGenerator->setName($className);
-        $classGenerator->addUse($classToImplement);
-        $tmpRef = new \ReflectionClass($classToImplement);
+        $classGenerator->addUse($commandQueryInterfaceToImplement);
+        $tmpRef = new \ReflectionClass($commandQueryInterfaceToImplement);
         $classGenerator->setImplementedInterfaces([$tmpRef->getShortName()]);
-        $this->addMethodsFromInterface($classToImplement, $classGenerator);
+        $this->addMethodsFromInterface($commandQueryInterfaceToImplement, $classGenerator);
 
 
         //Set basic properties for command handler
-        $classToImplement = $this->getAbstractHandlerClassName();
-        $tmpRef           = new \ReflectionClass($classToImplement);
+        $commandHandlerClassToImplement = $this->getAbstractHandlerClassName();
+        $tmpRef                         = new \ReflectionClass($commandHandlerClassToImplement);
         $handlerGenerator->setName($handlerName);
-        $handlerGenerator->addUse($classToImplement);
+        $handlerGenerator->addUse($commandHandlerClassToImplement);
         $handlerGenerator->setExtendedClass($tmpRef->getShortName());
-        $this->addMethodsFromAbstractClass($classToImplement, $handlerGenerator);
+        $this->addMethodsFromAbstractClass($commandHandlerClassToImplement, $handlerGenerator);
 
 
         //Set basic properties for command handler factory
-        $classToImplement = FactoryInterface::class;
+        $commandHandlerFactoryClassToImplement = FactoryInterface::class;
         $handlerFactoryGenerator->setName($handlerFactoryName);
-        $handlerFactoryGenerator->addUse($classToImplement);
+        $handlerFactoryGenerator->addUse($commandHandlerFactoryClassToImplement);
+
         $handlerFactoryGenerator->setImplementedInterfaces(['FactoryInterface']);
-        $this->addMethodsFromInterface($classToImplement, $handlerFactoryGenerator);
+        $this->addMethodsFromInterface($commandHandlerFactoryClassToImplement, $handlerFactoryGenerator);
         $method = $handlerFactoryGenerator->getMethod('createService');
-        $handlerFactoryGenerator->addUse(sprintf('%s\%s',$handlerGenerator->getNamespaceName(), $handlerGenerator->getName()));
         $method->setBody(sprintf('return new %s();', $handlerGenerator->getName()));
 
         //GENERATE IT !!!
