@@ -10,6 +10,7 @@ Cammand generation is invokes as other ZF2 CLI controllers via `php public/index
 `generate command --module= --name=`
 
 `--module` - Module name (Example: Application)
+
 `--name` - Command name (Example: User/Create, CreateUser, Domain/Create/User)
 
 NOTE: Command name parameter uses shashes (/) to create subdirectories.
