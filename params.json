@@ -1,6 +1,6 @@
 {
   "name": "ZF2 Command Query Generator",
   "tagline": "Command and handler generator for Zf2 Tactician Module",
-  "body": "# Command Query Generator\r\n## ZF2 Module for [Tactician](http://tactician.thephpleague.com)\r\n\r\nModule for ZF2 that allows to create command and handler from **CLI**.\r\n\r\n### Usage\r\n\r\nCammand generation is invokes as other ZF2 CLI controllers via `php public/index.php ...`\r\n\r\n`generate command --module= --name=`\r\n\r\n`--module` - Module name (Example: Application)\r\n\r\n`--name` - Command name (Example: User/Create, CreateUser, Domain/Create/User)\r\n\r\nNOTE: Command name parameter uses shashes (/) to create subdirectories.\r\n",
+  "body": "# Command Query Generator\r\n## ZF2 Module for [Tactician](http://tactician.thephpleague.com)\r\n\r\nModule for ZF2 that allows to create command and handler from **CLI**.\r\n\r\n### Install\r\n\r\n1. `composer require-dev code-mine/zf-tactician-comandquery-generator`\r\n2. Add `CodeMine\\CommandQueryGenerator` to your Zf2 modules\r\n\r\n### Usage\r\n\r\nCammand generation is invokes as other ZF2 CLI controllers via `php public/index.php ...`\r\n\r\n`generate command --module= --name=`\r\n\r\n`--module` - Module name (Example: Application)\r\n\r\n`--name` - Command name (Example: User/Create, CreateUser, Domain/Create/User)\r\n\r\nNOTE: Command name parameter uses shashes (/) to create subdirectories.",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
