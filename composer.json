@@ -17,7 +17,7 @@
   "require"    : {
     "php"                               : ">=5.5",
     "zendframework/zend-servicemanager" : "^2.7.6",
-    "zendframework/zend-mvc-console"    : "~1.1",
+    "zendframework/zend-mvc"            : "^2.7.10",
     "zendframework/zend-modulemanager"  : "~2.7",
     "zendframework/zend-code"           : "~3.0",
     "code-mine/zf-tactician-comandquery": "dev-composer"
