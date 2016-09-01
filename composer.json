@@ -21,6 +21,7 @@
     "zendframework/zend-mvc"            : "^2.7.0",
     "zendframework/zend-serializer"     : "^2.8.0",
     "zendframework/zend-router"         : "^3.0.1",
+    "zendframework/zend-log"            : "^2.9.1",
     "zendframework/zend-modulemanager"  : "~2.7",
     "zendframework/zend-code"           : "~3.0",
     "code-mine/zf-tactician-comandquery": "dev-composer"
