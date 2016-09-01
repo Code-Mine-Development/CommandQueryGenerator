@@ -51,8 +51,15 @@ class DirectoryService
         foreach ($this->config['module_listener_options']['module_paths'] as $modulePath) {
             $possiblePath = sprintf('%s%s%s', $modulePath, DIRECTORY_SEPARATOR, $moduleName);
             if (TRUE === is_dir($possiblePath)) {
-                return sprintf('%s%s%s%s%s%s%s', $this->rootPath, DIRECTORY_SEPARATOR,
+                $maybeThis = sprintf('%s%s%s%s%s%s%s', $this->rootPath, DIRECTORY_SEPARATOR,
                     $possiblePath, DIRECTORY_SEPARATOR, 'src', DIRECTORY_SEPARATOR, $moduleName);
+                if(TRUE == is_dir($maybeThis)){
+                    return $maybeThis;
+                }else{
+                    return sprintf('%s%s%s%s%s', $this->rootPath, DIRECTORY_SEPARATOR,
+                                         $possiblePath, DIRECTORY_SEPARATOR, 'src');
+
+                }
             }
         }
 
@@ -90,6 +97,7 @@ class DirectoryService
 
         for ($i = 0; $i < count($pathComponents) - 1; $i++) {
             $objectPath = sprintf('%s%s%s', $objectPath, DIRECTORY_SEPARATOR, $pathComponents[$i]);
+
             @mkdir($objectPath);
             if (FALSE === is_dir($objectPath)) {
                 throw new \RuntimeException('Could not create directory for command');

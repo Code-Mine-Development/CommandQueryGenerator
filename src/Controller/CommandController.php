@@ -3,6 +3,7 @@ namespace CodeMine\CommandQueryGenerator\Controller;
 
 use CodeMine\CommandQueryGenerator\Service\CreateCommandService;
 use CodeMine\CommandQueryGenerator\Service\DirectoryService;
+use Interop\Container\ContainerInterface;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -18,20 +19,26 @@ class CommandController extends AbstractActionController
      */
     private $config;
     /**
+     * @var \Interop\Container\ContainerInterface
+     */
+    private $container;
+
+    /**
      * CommandController constructor.
      *
      * @param array $config
      * @param       $rootPath
      */
-    public function __construct(array $config)
+    public function __construct(array $config, ContainerInterface $container)
     {
-        $this->config   = $config;
+        $this->config    = $config;
+        $this->container = $container;
     }
 
     public function generateCommandAction()
     {
         /** @var AdapterInterface $console */
-        $console = $this->getServiceLocator()->get('console');
+        $console = $this->container->get('console');
         if (!$console instanceof AdapterInterface) {
             throw new \RuntimeException('Cannot obtain console adapter. Are we running in a console?');
         }
