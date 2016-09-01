@@ -12,6 +12,8 @@
   "support"    : {
     "email": "office@code-mine.com"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require"    : {
     "php"                               : ">=5.5",
     "zendframework/zend-servicemanager" : "~3.1",
