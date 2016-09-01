@@ -16,8 +16,7 @@
   "prefer-stable"    : true,
   "require"          : {
     "php"                               : ">=5.5",
-    "zendframework/zend-mvc-console"    : "^1.1.9",
-    "code-mine/zf-tactician-comandquery": "dev-composer"
+    "zendframework/zend-mvc-console"    : "^1.1.9"
   },
   "autoload"         : {
     "psr-4"   : {
