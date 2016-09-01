@@ -10,7 +10,7 @@ use CodeMine\CommandQuery\CommandQueryInputFilterAwareInterface;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\FileGenerator;
 use Zend\Code\Generator\MethodGenerator;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 abstract class AbstractCommandQueryService
 {
@@ -25,8 +25,8 @@ abstract class AbstractCommandQueryService
     /**
      * AbstractCommandQueryService constructor.
      *
-     * @param                                                 $commandQueryName
-     * @param                                                 $moduleName
+     * @param                                                          $commandQueryName
+     * @param                                                          $moduleName
      * @param \CodeMine\CommandQueryGenerator\Service\DirectoryService $directoryService
      */
     public function __construct($commandQueryName, $moduleName, DirectoryService $directoryService)
@@ -67,15 +67,13 @@ abstract class AbstractCommandQueryService
             //Get parameters for each method to add from interface
             $reflectionParameters = $method->getParameters();
             $parameters           = [];
+
             /** @var \ReflectionParameter $tmpParameter */
             foreach ($reflectionParameters as $tmpParameter) {
-                //Need to do some magic to get type of the parameter :)
-                if (NULL === $tmpParameter->getClass()) {
-                    continue;
-                }
-                $classGenerator->addUse($tmpParameter->getClass()->name);
-                $shortParameterTypeName = preg_replace('/(.*?)\\\/', '', $tmpParameter->getClass()->name);
-                $parameters[]           = ['name' => $tmpParameter->getName(), 'type' => $shortParameterTypeName];
+                $par = $this->getParametersForFunction($tmpParameter);
+
+                $parameters[] = $par;
+
             }
 
             //Add the method to given class
@@ -113,14 +111,9 @@ abstract class AbstractCommandQueryService
             $parameters           = [];
             /** @var \ReflectionParameter $tmpParameter */
             foreach ($reflectionParameters as $tmpParameter) {
-                //Need to do some magic to get type of the parameter :)
-                if (NULL === $tmpParameter->getClass()) {
-                    continue;
-                }
+                $par = $this->getParametersForFunction($tmpParameter);
 
-                $classGenerator->addUse($tmpParameter->getClass()->name);
-                $shortParameterTypeName = preg_replace('/(.*?)\\\/', '', $tmpParameter->getClass()->name);
-                $parameters[]           = ['name' => $tmpParameter->getName(), 'type' => $shortParameterTypeName];
+                $parameters[] = $par;
             }
 
             //Add the method to given class
@@ -170,9 +163,9 @@ abstract class AbstractCommandQueryService
         //Set basic properties for command
         $commandQueryInterfaceToImplement = $this->getCommandQueryInterfaceToImplement();
         $classGenerator->setName($className);
-        $classGenerator->addUse($commandQueryInterfaceToImplement);
+//        $classGenerator->addUse($commandQueryInterfaceToImplement);
         $tmpRef = new \ReflectionClass($commandQueryInterfaceToImplement);
-        $classGenerator->setImplementedInterfaces([$tmpRef->getShortName()]);
+        $classGenerator->setImplementedInterfaces([$tmpRef->getName()]);
         $this->addMethodsFromInterface($commandQueryInterfaceToImplement, $classGenerator);
 
 
@@ -180,8 +173,7 @@ abstract class AbstractCommandQueryService
         $commandHandlerClassToImplement = $this->getAbstractHandlerClassName();
         $tmpRef                         = new \ReflectionClass($commandHandlerClassToImplement);
         $handlerGenerator->setName($handlerName);
-        $handlerGenerator->addUse($commandHandlerClassToImplement);
-        $handlerGenerator->setExtendedClass($tmpRef->getShortName());
+        $handlerGenerator->setExtendedClass($tmpRef->getName());
         $this->addMethodsFromAbstractClass($commandHandlerClassToImplement, $handlerGenerator);
 
 
@@ -190,10 +182,11 @@ abstract class AbstractCommandQueryService
         $handlerFactoryGenerator->setName($handlerFactoryName);
         $handlerFactoryGenerator->addUse($commandHandlerFactoryClassToImplement);
 
-        $handlerFactoryGenerator->setImplementedInterfaces(['FactoryInterface']);
+        $handlerFactoryGenerator->setImplementedInterfaces([FactoryInterface::class]);
         $this->addMethodsFromInterface($commandHandlerFactoryClassToImplement, $handlerFactoryGenerator);
-        $method = $handlerFactoryGenerator->getMethod('createService');
-        $method->setBody(sprintf('return new %s();', $handlerGenerator->getName()));
+//        $method = $handlerFactoryGenerator->getMethod('__invoke');
+////        $method->setParameters()
+//        $method->setBody(sprintf('return new %s();', $handlerGenerator->getName()));
 
         //GENERATE IT !!!
         $fileGenerator = FileGenerator::fromArray(['classes' => [$classGenerator]]);
@@ -210,5 +203,44 @@ abstract class AbstractCommandQueryService
             sprintf('%s\%s', $handlerGenerator->getNamespaceName(), $handlerGenerator->getName()),
             sprintf('%s\%s', $handlerFactoryGenerator->getNamespaceName(), $handlerFactoryGenerator->getName()),
         ];
+    }
+
+    /**
+     * @param $tmpParameter
+     *
+     * @return array
+     */
+    protected function getParametersForFunction(\ReflectionParameter $tmpParameter)
+    {
+        //Need to do some magic to get type of the parameter :)
+        if (NULL === $tmpParameter->getClass()) {
+
+            if ($tmpParameter->getType() != NULL) {
+                $par = ['name' => $tmpParameter->getName(), 'type' => $tmpParameter->getType()];
+
+            } else {
+                $par = ['name' => $tmpParameter->getName()];
+            }
+
+
+            if ($tmpParameter->isDefaultValueAvailable()) {
+                $par['defaultvalue'] = $tmpParameter->getDefaultValue();
+
+                return $par;
+            }
+
+            return $par;
+
+        } else {
+            $par = ['name' => $tmpParameter->getName(), 'type' => $tmpParameter->getClass()->name];
+            if ($tmpParameter->isDefaultValueAvailable()) {
+                $par['defaultvalue'] = $tmpParameter->getDefaultValue();
+
+                return $par;
+            }
+
+            return $par;
+
+        }
     }
 }

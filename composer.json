@@ -19,8 +19,7 @@
         "zendframework/zend-console"        : ">=2.5",
         "zendframework/zend-modulemanager"  : ">=2.5",
         "zendframework/zend-code"           : ">=2.5",
-        "zendframework/zend-server"         : ">=2.5",
-        "code-mine/zf-tactician-comandquery": ">=2.0"
+        "code-mine/zf-tactician-comandquery": "dev-composer"
     },
     "autoload"   : {
         "psr-4": {

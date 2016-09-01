@@ -1,24 +1,20 @@
 <?php
 namespace CodeMine\CommandQueryGenerator\Controller;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
-use Zend\Mvc\Application;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @author Radek Adamiec <radek@code-mine.com>.
  */
 class QueryControllerFactory implements FactoryInterface
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL)
     {
 
+        $config = $container->get('ApplicationConfig');
 
-        $config = $serviceLocator->getServiceLocator()->get('ApplicationConfig');
-
-
-
-        return new QueryController($config);
+        return new QueryController($config, $container);
     }
 
 

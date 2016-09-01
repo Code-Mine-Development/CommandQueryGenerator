@@ -26,8 +26,8 @@ class CommandController extends AbstractActionController
     /**
      * CommandController constructor.
      *
-     * @param array $config
-     * @param       $rootPath
+     * @param array                                 $config
+     * @param \Interop\Container\ContainerInterface $container
      */
     public function __construct(array $config, ContainerInterface $container)
     {
