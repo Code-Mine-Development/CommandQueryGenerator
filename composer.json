@@ -1,33 +1,30 @@
 {
-    "name"       : "code-mine/zf-tactician-comandquery-generator",
-    "description": "Command Query generator for tactician lib",
-    "license"    : "BSD-3-Clause",
-    "keywords"   : [
-        "tactician",
-        "generator",
-        "command",
-        "query"
-    ],
-    "homepage"   : "http://code-mine.com",
-    "support"    : {
-        "email": "office@code-mine.com"
+  "name"             : "code-mine/zf-tactician-comandquery-generator",
+  "description"      : "Command Query generator for tactician lib",
+  "license"          : "BSD-3-Clause",
+  "keywords"         : [
+    "tactician",
+    "generator",
+    "command",
+    "query"
+  ],
+  "homepage"         : "http://code-mine.com",
+  "support"          : {
+    "email": "office@code-mine.com"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable"    : true,
+  "require"          : {
+    "php"                           : ">=5.5",
+    "zendframework/zend-mvc-console": "^1.1.9",
+    "zendframework/zend-code"       : "~3.0"
+  },
+  "autoload"         : {
+    "psr-4"   : {
+      "CodeMine\\CommandQueryGenerator\\": "src/"
     },
-    "require"    : {
-        "php"                               : ">=5.5",
-        "zendframework/zend-servicemanager" : ">=2.5",
-        "zendframework/zend-mvc"            : ">=2.5",
-        "zendframework/zend-console"        : ">=2.5",
-        "zendframework/zend-modulemanager"  : ">=2.5",
-        "zendframework/zend-code"           : ">=2.5",
-        "zendframework/zend-server"         : ">=2.5",
-        "code-mine/zf-tactician-comandquery": ">=2.0"
-    },
-    "autoload"   : {
-        "psr-4": {
-            "CodeMine\\CommandQueryGenerator\\": "src/"
-        },
-        "classmap": [
-            "Module.php"
-        ]
-    }
+    "classmap": [
+      "Module.php"
+    ]
+  }
 }
