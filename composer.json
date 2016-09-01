@@ -16,7 +16,7 @@
   "prefer-stable"    : true,
   "require"          : {
     "php"                           : ">=5.5",
-    "zendframework/zend-mvc-console": "^2.7.6",
+    "zendframework/zend-mvc-console": "^1.1.9",
     "zendframework/zend-code"       : "~3.0"
   },
   "autoload"         : {
