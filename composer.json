@@ -19,6 +19,7 @@
     "zendframework/zend-servicemanager" : "^2.7.6",
     "zendframework/zend-console"        : "^2.6.0",
     "zendframework/zend-mvc"            : "^2.7.0",
+    "zendframework/zend-serializer"     : "^2.8.0",
     "zendframework/zend-router"         : "^3.0.1",
     "zendframework/zend-modulemanager"  : "~2.7",
     "zendframework/zend-code"           : "~3.0",
